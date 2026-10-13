@@ -1,0 +1,634 @@
+@import "@fontsource/inter/latin-300.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
+
+/* Charte Evolia : noir et blanc, angles droits. Quelques couleurs fonctionnelles seulement :
+   bleu pour les liens, vert pour valider, ambre pour signaler, rouge pour retirer ou bloquer. */
+:root {
+  --encre: #0a0a0a;
+  --corps: #343434;
+  --gris: #6a6a6a;
+  --pale: #8c8c8c;
+  --filet: #e4e4e4;
+  --aplat: #f2f2f2;
+  --fond: #ffffff;
+  --lien: #1f56d6;
+  --ok: #17803d;
+  --ok-fond: #ebf6ef;
+  --alerte: #b4530a;
+  --alerte-fond: #fbf1e8;
+  --danger: #c4262e;
+  --danger-fond: #fcecec;
+  --texte: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--corps);
+  font: 400 14px/1.55 var(--texte);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--encre);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+h1 {
+  font-size: 26px;
+  line-height: 1.2;
+}
+h2 {
+  font-size: 18px;
+}
+h3 {
+  font-size: 14px;
+}
+p {
+  margin: 0 0 10px;
+}
+a {
+  color: var(--lien);
+  text-underline-offset: 2px;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+.mono {
+  font-family: var(--mono);
+}
+.libelle {
+  font: 500 10.5px/1.4 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+.pale {
+  color: var(--pale);
+}
+.petit {
+  font-size: 12.5px;
+}
+.alerte {
+  color: var(--alerte);
+}
+.ok {
+  color: var(--ok);
+}
+.danger {
+  color: var(--danger);
+}
+
+/* ------------------------------------------------------------ structure */
+
+.entete {
+  border-bottom: 1px solid var(--filet);
+  background: var(--fond);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.entete-int {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.entete img {
+  height: 30px;
+  display: block;
+}
+.produit {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--filet);
+  padding-left: 18px;
+}
+.produit b {
+  font: 600 16px/1.1 var(--mono);
+  color: var(--encre);
+  letter-spacing: 0.02em;
+}
+.produit span {
+  font-size: 12px;
+  color: var(--gris);
+}
+.nav {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.nav button {
+  background: none;
+  border: 0;
+  padding: 7px 10px;
+  cursor: pointer;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+.nav button:hover,
+.nav button.actif {
+  color: var(--encre);
+}
+.nav button.actif {
+  box-shadow: inset 0 -2px 0 var(--encre);
+}
+.etapes {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 1px solid var(--filet);
+}
+.etapes button {
+  text-align: left;
+  background: none;
+  border: 0;
+  border-top: 2px solid transparent;
+  padding: 12px 12px 12px 0;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  color: var(--pale);
+}
+.etapes button .num {
+  font: 500 11px/1 var(--mono);
+}
+.etapes button .tit {
+  font-weight: 500;
+}
+.etapes button.actif {
+  border-top-color: var(--encre);
+  color: var(--encre);
+}
+.etapes button.fait {
+  color: var(--corps);
+}
+.etapes button.fait .num {
+  color: var(--ok);
+  font-weight: 600;
+}
+.etapes button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+main {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 28px 24px 80px;
+}
+.intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+.intro p {
+  max-width: 760px;
+  color: var(--corps);
+  font-size: 15px;
+  font-weight: 300;
+  margin: 8px 0 0;
+}
+.pied {
+  border-top: 1px solid var(--filet);
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 16px 24px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  justify-content: space-between;
+  font: 400 11px/1.4 var(--mono);
+  letter-spacing: 0.06em;
+  color: var(--pale);
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------- éléments */
+
+.btn {
+  background: var(--encre);
+  color: #fff;
+  border: 1px solid var(--encre);
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.btn:hover {
+  background: #2a2a2a;
+}
+.btn:disabled {
+  background: var(--pale);
+  border-color: var(--pale);
+  cursor: default;
+}
+.btn-ok {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+.btn-ok:hover {
+  background: #116330;
+}
+.btn-sec {
+  background: var(--fond);
+  color: var(--encre);
+  border: 1px solid var(--encre);
+  padding: 9px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.btn-sec:hover {
+  background: var(--aplat);
+}
+.btn-sec:disabled {
+  color: var(--pale);
+  border-color: var(--filet);
+  cursor: default;
+}
+.lien {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: var(--lien);
+}
+.lien:hover {
+  text-decoration-thickness: 2px;
+}
+.lien-pale {
+  background: none;
+  border: 0;
+  padding: 2px 4px;
+  cursor: pointer;
+  color: var(--gris);
+}
+.lien-pale:hover {
+  color: var(--encre);
+}
+.lien-pale.danger {
+  color: var(--danger);
+}
+.lien-pale.danger:hover {
+  color: var(--danger);
+  text-decoration: underline;
+}
+.separateur {
+  width: 1px;
+  align-self: stretch;
+  background: var(--filet);
+  margin: 0 4px;
+}
+
+input[type="text"],
+select {
+  border: 1px solid #cfcfcf;
+  background: var(--fond);
+  padding: 8px 10px;
+  min-width: 0;
+}
+input[type="text"]:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--encre);
+  outline-offset: 1px;
+}
+input[type="checkbox"] {
+  accent-color: var(--encre);
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  vertical-align: -2px;
+}
+
+.panneau {
+  background: var(--aplat);
+  border-left: 2px solid var(--encre);
+  padding: 14px 18px;
+}
+.panneau-neutre {
+  border-left-color: var(--pale);
+}
+.panneau-ok {
+  background: var(--ok-fond);
+  border-left-color: var(--ok);
+}
+.panneau-alerte {
+  background: var(--alerte-fond);
+  border-left: 2px solid var(--alerte);
+  padding: 12px 16px;
+  color: var(--corps);
+}
+.panneau-danger {
+  background: var(--danger-fond);
+  border-left: 2px solid var(--danger);
+  padding: 12px 16px;
+  color: var(--corps);
+}
+.cadre {
+  border: 1px solid var(--filet);
+  padding: 18px;
+}
+.cadre-ok {
+  border-color: var(--ok);
+  box-shadow: inset 3px 0 0 var(--ok);
+}
+ol.etapes-num {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+ol.etapes-num li {
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+.grille-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.ligne {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.espace {
+  height: 18px;
+}
+.barre {
+  height: 4px;
+  background: var(--filet);
+  margin-top: 8px;
+  position: relative;
+}
+.barre i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--encre);
+}
+
+table.t {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.t th {
+  text-align: left;
+  font: 500 10.5px/1.3 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gris);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--encre);
+}
+table.t td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--filet);
+  vertical-align: middle;
+}
+table.t tr.choisi td {
+  background: var(--aplat);
+}
+.puce {
+  display: inline-block;
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  padding: 4px 6px;
+  white-space: nowrap;
+}
+.puce.ok {
+  color: var(--ok);
+  background: var(--ok-fond);
+}
+.puce.attention {
+  color: var(--alerte);
+  background: var(--alerte-fond);
+}
+.puce.bloquant {
+  background: var(--danger);
+  color: #fff;
+  border-color: var(--danger);
+}
+.pseudo {
+  font: 500 12px/1 var(--mono);
+  background: var(--encre);
+  color: #fff;
+  padding: 3px 6px;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------- dépôt (étape 1) */
+
+.depot {
+  border: 1px dashed #b4b4b4;
+  padding: 46px 24px;
+  text-align: center;
+  background: #fafafa;
+  cursor: pointer;
+}
+.depot.survol {
+  border-color: var(--encre);
+  background: var(--aplat);
+}
+.depot h2 {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+/* ----------------------------------------------------------- aperçu de page */
+
+.apercu {
+  position: relative;
+  border: 1px solid var(--filet);
+  background: #fff;
+  user-select: none;
+  touch-action: none;
+}
+.apercu img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.apercu .calque {
+  position: absolute;
+  inset: 0;
+  cursor: crosshair;
+}
+.apercu .r {
+  position: absolute;
+}
+.apercu .r.zone {
+  background: rgba(10, 10, 10, 0.86);
+  outline: 1px solid #000;
+}
+.apercu .r.terme,
+.apercu .r.motif {
+  background: rgba(10, 10, 10, 0.86);
+}
+.apercu .r.manuel {
+  background: rgba(10, 10, 10, 0.86);
+  outline: 1px dashed #fff;
+}
+.apercu .r.retire {
+  background: transparent;
+  outline: 2px dashed var(--alerte);
+}
+.apercu .r.trace {
+  outline: 2px solid var(--alerte);
+  background: rgba(180, 83, 10, 0.12);
+}
+.apercu.avant .r {
+  background: transparent !important;
+  outline: 1.5px solid var(--alerte);
+}
+.apercu .r button {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  background: var(--danger);
+  color: #fff;
+  font: 600 11px/18px var(--mono);
+  cursor: pointer;
+  padding: 0;
+}
+.chargement {
+  aspect-ratio: 1.41;
+  display: grid;
+  place-items: center;
+  color: var(--pale);
+  background: #fafafa;
+}
+
+/* ------------------------------------------------------- vérification */
+
+.verif {
+  display: grid;
+  grid-template-columns: 290px 1fr 300px;
+  gap: 20px;
+  align-items: start;
+}
+.liste-fichiers {
+  border-top: 1px solid var(--encre);
+  max-height: calc(100vh - 230px);
+  overflow: auto;
+}
+.liste-fichiers button {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 8px;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid var(--filet);
+  background: none;
+  padding: 10px 8px;
+  cursor: pointer;
+}
+.liste-fichiers button.actif {
+  background: var(--aplat);
+  box-shadow: inset 2px 0 0 var(--encre);
+}
+.liste-fichiers .nom {
+  font-weight: 500;
+  color: var(--encre);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.colonne-droite {
+  border-top: 1px solid var(--encre);
+  padding-top: 12px;
+  max-height: calc(100vh - 230px);
+  overflow: auto;
+}
+.det {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--filet);
+  align-items: start;
+}
+
+/* ------------------------------------------------------------ méthodes */
+
+.methodes {
+  max-width: 920px;
+}
+.methodes section {
+  border-top: 1px solid var(--filet);
+  padding: 22px 0;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 18px;
+}
+.methodes section .n {
+  font: 500 12px/1.8 var(--mono);
+  color: var(--pale);
+}
+.methodes section h2 {
+  margin-bottom: 8px;
+}
+.methodes ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+.methodes li {
+  margin-bottom: 4px;
+}
+
+.mdp {
+  font: 600 26px/1.2 var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--encre);
+  padding: 16px 0;
+}
+
+@media (max-width: 1100px) {
+  .verif {
+    grid-template-columns: 1fr;
+  }
+  .grille-2 {
+    grid-template-columns: 1fr;
+  }
+}

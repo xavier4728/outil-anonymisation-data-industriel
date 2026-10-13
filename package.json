@@ -1,0 +1,51 @@
+{
+  "name": "evmasque",
+  "private": true,
+  "version": "1.1.0",
+  "description": "EvMasque, l'outil d'anonymisation des données de chiffrage d'Evolia Stratégie. Tout le traitement se fait dans le navigateur.",
+  "license": "Apache-2.0",
+  "author": "EVOLIA STRATÉGIE SAS (https://www.evoliastrategie.com)",
+  "homepage": "https://anonymisation.evoliastrategie.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xavier4728/outil-anonymisation-data-industriel.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run",
+    "corpus": "uv run --no-project --with reportlab --with pillow --with openpyxl python scripts/generer-corpus.py",
+    "e2e": "node tests/e2e/parcours.mjs",
+    "verifier": "uv run --no-project --with pypdf --with openpyxl --with pypdfium2 --with pillow python tests/e2e/verifier-sortie.py",
+    "recette": "npm test && npm run build && npm run corpus && npm run e2e && npm run verifier"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@tesseract.js-data/deu": "^1.0.0",
+    "@tesseract.js-data/eng": "^1.0.0",
+    "@tesseract.js-data/fra": "^1.0.0",
+    "@zip.js/zip.js": "^2.23.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.4.299",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tesseract.js": "^7.0.0",
+    "utif2": "^4.1.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "playwright": "^1.64.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vitest": "^5.0.4"
+  }
+}

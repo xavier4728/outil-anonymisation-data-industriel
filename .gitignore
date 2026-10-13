@@ -1,0 +1,7 @@
+node_modules/
+dist/
+corpus/
+tests/e2e/sortie/
+*.log
+.DS_Store
+dist-debug/

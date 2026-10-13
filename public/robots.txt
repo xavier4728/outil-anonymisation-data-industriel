@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anonymisation.evoliastrategie.com/sitemap.xml
