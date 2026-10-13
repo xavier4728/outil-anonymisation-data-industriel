@@ -27,7 +27,7 @@ import {
   type Terme,
 } from "./lib/types";
 
-export type Vue = 1 | 2 | 3 | 4 | 5 | "methodes" | "chiffrement" | "aide";
+export type Vue = "accueil" | 1 | 2 | 3 | 4 | 5 | "methodes" | "chiffrement" | "aide";
 
 export interface Avancement {
   fait: number;
@@ -60,7 +60,7 @@ export interface Etat {
 }
 
 const INITIAL: Etat = {
-  vue: 1,
+  vue: "accueil",
   fichiers: [],
   pages: [],
   gabarits: [],

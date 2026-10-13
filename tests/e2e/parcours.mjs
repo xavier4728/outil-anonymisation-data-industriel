@@ -57,6 +57,11 @@ const continuer = page.getByRole("button", { name: "Continuer", exact: true });
 await page.goto(pathToFileURL(join(RACINE, "dist", "index.html")).href);
 log("page ouverte");
 
+// Accueil
+await page.getByRole("button", { name: "Commencer", exact: true }).first().waitFor();
+await ecran("0-accueil");
+await page.getByRole("button", { name: "Commencer", exact: true }).first().click();
+
 // Étape 1
 await page.getByTestId("choisir-dossier").setInputFiles(CORPUS);
 await page.getByText("Lecture des fichiers").waitFor({ state: "detached", timeout: 120_000 }).catch(() => undefined);
@@ -142,6 +147,16 @@ await page.getByRole("button", { name: "Nos méthodes" }).click();
 await ecran("7-methodes");
 await page.getByRole("button", { name: "Chiffrement", exact: true }).click();
 await ecran("8-chiffrement");
+
+// Un plan seul, choisi comme fichier et non comme dossier
+const seul = await contexte.newPage();
+seul.on("pageerror", (e) => erreurs.push(String(e)));
+await seul.goto(pathToFileURL(join(RACINE, "dist", "index.html")).href);
+await seul.getByRole("button", { name: "Commencer", exact: true }).first().click();
+await seul.getByTestId("choisir-fichiers").setInputFiles(join(CORPUS, "FA-20417-B", "FA-20417-B_plan.pdf"));
+await seul.getByText("1 pièce · 1 fichier", { exact: true }).waitFor({ timeout: 60_000 });
+await seul.screenshot({ path: join(SORTIE, "9-plan-seul.png"), fullPage: true });
+log("plan seul accepté");
 
 writeFileSync(
   join(SORTIE, "resultat.json"),

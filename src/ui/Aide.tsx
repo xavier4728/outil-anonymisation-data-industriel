@@ -10,7 +10,7 @@ export function Aide() {
     ],
     [
       "Je ne peux pas déposer un dossier.",
-      "Utilisez le bouton « Choisir des fichiers » et sélectionnez-les tous (Ctrl + A). Le regroupement par pièce se fera alors à partir du début des noms de fichiers.",
+      "Utilisez le bouton « Choisir un ou plusieurs fichiers » et sélectionnez-les tous (Ctrl + A). Le regroupement par pièce se fera alors à partir du début des noms de fichiers.",
     ],
     [
       "Un fichier n'est pas regroupé avec la bonne pièce.",

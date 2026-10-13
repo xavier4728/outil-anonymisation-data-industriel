@@ -3,6 +3,7 @@ import logo from "./assets/logo-evolia-noir.png";
 import { useEv, type Vue } from "./etat";
 import { Externe, LIENS } from "./liens";
 import { VERSION } from "./lib/livrables";
+import { Accueil } from "./ui/Accueil";
 import { Aide } from "./ui/Aide";
 import { Chiffrement } from "./ui/Chiffrement";
 import { Etape1 } from "./ui/Etape1";
@@ -47,11 +48,14 @@ export function App() {
           <a href={LIENS.site} target="_blank" rel="noopener noreferrer" title="Evolia Stratégie (nouvel onglet)">
             <img src={logo} alt="Evolia Stratégie" />
           </a>
-          <div className="produit">
+          <button className="produit" onClick={() => aller("accueil")} title="Accueil d'EvMasque">
             <b>EvMasque</b>
             <span>Anonymisation des données de chiffrage</span>
-          </div>
+          </button>
           <nav className="nav">
+            <button className={e.vue === "accueil" ? "actif" : ""} onClick={() => aller("accueil")}>
+              Accueil
+            </button>
             <button className={typeof e.vue === "number" ? "actif" : ""} onClick={() => aller(typeof e.vue === "number" ? e.vue : 1)}>
               Parcours
             </button>
@@ -85,6 +89,7 @@ export function App() {
       )}
 
       <main>
+        {e.vue === "accueil" && <Accueil />}
         {e.vue === 1 && <Etape1 />}
         {e.vue === 2 && <Etape2 />}
         {e.vue === 3 && <Etape3 />}

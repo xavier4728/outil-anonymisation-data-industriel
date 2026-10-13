@@ -26,8 +26,9 @@ export function Etape1() {
           <span className="libelle">Étape 1 sur 5</span>
           <h1>Vos fichiers</h1>
           <p>
-            Déposez le dossier qui contient vos dossiers de pièces : plans PDF ou TIF, images, fichiers STEP, études Excel,
-            exports de temps. Les fichiers sont lus <b>dans cet onglet</b>, sur votre poste : ils ne sont envoyés nulle part.
+            Ajoutez un seul plan, quelques fichiers ou un dossier complet : plans PDF ou TIF, images, fichiers STEP, études
+            Excel, exports de temps. Les fichiers sont lus <b>dans cet onglet</b>, sur votre poste : ils ne sont envoyés nulle
+            part. Vous pouvez en ajouter plusieurs fois.
           </p>
         </div>
         {traites.length > 0 && (
@@ -50,19 +51,30 @@ export function Etape1() {
           const entrees = await lireDepot(ev.dataTransfer.items);
           void deposer(entrees);
         }}
-        onClick={() => inputDossier.current?.click()}
+        onClick={() => inputFichiers.current?.click()}
       >
-        <h2>Glissez votre dossier ici</h2>
-        <p className="pale">ou cliquez pour le choisir. Un sous-dossier par pièce est l'idéal, mais pas obligatoire.</p>
+        <h2>Glissez ici un plan, des fichiers ou un dossier</h2>
+        <p className="pale">
+          ou choisissez-les ci-dessous. Pour plusieurs pièces, un sous-dossier par pièce est l'idéal, mais pas obligatoire.
+        </p>
         <div className="ligne" style={{ justifyContent: "center", marginTop: 14 }}>
           <button
-            className="btn-sec"
+            className="btn"
             onClick={(ev) => {
               ev.stopPropagation();
               inputFichiers.current?.click();
             }}
           >
-            Choisir des fichiers
+            Choisir un ou plusieurs fichiers
+          </button>
+          <button
+            className="btn-sec"
+            onClick={(ev) => {
+              ev.stopPropagation();
+              inputDossier.current?.click();
+            }}
+          >
+            Choisir un dossier
           </button>
         </div>
         <input

@@ -38,7 +38,8 @@ Pour tester un outil de chiffrage automatique, un usineur doit confier des donn�
 
 | Étape | Contenu |
 |---|---|
-| 1. Vos fichiers | Dépôt d'un dossier (glisser ou sélectionner) ou de fichiers ; regroupement par pièce (sous-dossier, sinon début du nom) modifiable ; fichiers non pris en charge listés ; reprise d'un projet enregistré |
+| Accueil | Page d'arrivée : à quoi sert l'outil, les 5 étapes, les garanties sur les données, les formats ; bouton « Commencer » |
+| 1. Vos fichiers | Dépôt d'un seul fichier, de plusieurs fichiers ou d'un dossier (glisser, ou deux boutons : fichiers en action principale, dossier en option) ; regroupement par pièce (sous-dossier, sinon début du nom) modifiable ; fichiers non pris en charge listés ; reprise d'un projet enregistré |
 | 2. Ce qu'il faut masquer | Dictionnaire (pseudonyme neutre `MASQUE-001`, ou `P-001` pour une référence de pièce) ; références des pièces ajoutées d'office ; suggestions (raisons sociales, libellés client / Kunde / dessiné par, n° de plan, domaines d'e-mail, en-têtes STEP) ; coordonnées automatiques ; colonnes de prix retirées par défaut ; feuilles masquées exclues par défaut ; OCR renforcé en option |
 | 3. Zone commune aux plans | Une zone par format de page (le cartouche), proposée par défaut (190 × 60 mm en bas à droite), modifiable, appliquée à tous les plans du format |
 | 4. Retouche plan par plan | Aperçu avant / après de chaque page, masques activables, ajouts manuels, remplacements STEP et tableur listés ; **validation explicite de chaque fichier** |
@@ -82,6 +83,7 @@ La recette (`npm run recette`) rejoue tout sur un corpus **fictif** généré pa
 | Colonnes de prix retirées, feuille masquée écartée | Relecture du classeur produit |
 | Table de correspondance absente du paquet | Inventaire de l'archive |
 | Scans CCITT, TIF allemand multipage, photo JPG lus par OCR | Termes trouvés et masqués |
+| Un plan seul, choisi comme fichier, est accepté | Parcours automatique |
 | Verrou réseau identique dans la page et dans l'en-tête HTTP | Test unitaire |
 
 EvMasque a aussi été éprouvé sur un lot de plans réels, de bout en bout, enregistrement par sélecteur de dossier et ouverture de l'archive avec 7-Zip compris. Ces plans ne sont évidemment pas dans le dépôt.
